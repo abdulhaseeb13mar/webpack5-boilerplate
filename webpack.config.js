@@ -24,7 +24,7 @@ if (process.env.FAST_REFRESH) {
 
 module.exports = {
   mode,
-  entry: "./src/index.js",
+  entry: "./src/index.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     assetModuleFilename: "images/[hash][ext][query]",
@@ -43,7 +43,7 @@ module.exports = {
         type: "asset",
       },
       {
-        test: /\.jsx?$/,
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -60,10 +60,10 @@ module.exports = {
   plugins,
 
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
 
-  devtool: "source-map",
+  //   devtool: "source-map",
   devServer: {
     hot: true, // not necessary in the latest version of webpack by default true
   },
