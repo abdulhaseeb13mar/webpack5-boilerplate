@@ -436,7 +436,11 @@ const getColorThemes = (mode: PaletteMode): ThemeOptions => ({
   },
 });
 
-const Theme: FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const Theme: FC<Props> = ({ children }) => {
   const { colorTheme } = useSelector((state: RootState) => state.app);
   const theme = useMemo(
     () => createTheme(getColorThemes(colorTheme)),
