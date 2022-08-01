@@ -26,7 +26,7 @@ import { EIP712TypedData, HexString } from "./types";
 import { SignedEVMTransaction } from "./networks";
 import { AddressOnNetwork, NameOnNetwork } from "./accounts";
 
-import { persistedReducer as rootReducer } from "../redux/reducers/index";
+import { persistedReducer as rootReducer } from "@redux/reducers";
 // import {
 //   loadAccount,
 //   updateAccountBalance,
@@ -59,13 +59,13 @@ import {
   selectDefaultNetworkFeeSettings,
   TransactionConstructionStatus,
   transactionSigned,
-} from "../redux/slices/transaction-construction";
+} from "@slices/transaction-construction";
 // import { allAliases } from "./redux-slices/utils";
 import {
   requestPermission,
   emitter as providerBridgeSliceEmitter,
   initializeAllowedPages,
-} from "../redux/slices/dapp-permission";
+} from "@slices/dapp-permission";
 import logger from "./lib/logger";
 import {
   clearSigningState,
@@ -74,7 +74,7 @@ import {
   signingSliceEmitter,
   typedDataRequest,
   signDataRequest,
-} from "../redux/slices/signing";
+} from "@slices/signing";
 
 import {
   SigningMethod,
@@ -87,7 +87,7 @@ import {
 //   setUsbDeviceCount,
 // } from "./redux-slices/ledger";
 import { ETHEREUM } from "./constants";
-import { allAliases } from "../redux/slices/utils";
+import { allAliases } from "@slices/utils";
 // import { clearApprovalInProgress } from "./redux-slices/0x-swap";
 // import { SignatureResponse, TXSignatureResponse } from "./services/signing";
 

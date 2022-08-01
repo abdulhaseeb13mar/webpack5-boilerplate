@@ -1,4 +1,4 @@
-import { ThisRootState } from "../redux/reducers";
+import { ThisRootState } from "@redux/reducers";
 import { ElementType, MouseEventHandler } from "react";
 import { Transition } from "framer-motion";
 import { OverridableComponent } from "@mui/material/OverridableComponent";

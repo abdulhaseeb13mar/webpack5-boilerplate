@@ -1,0 +1,142 @@
+*,
+*:after,
+*:before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.bg__container_loggedin {
+  width: 100vw;
+  height: 300px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.bg__container_loggedout {
+  width: 100vw;
+  height: 300px;
+  position: absolute;
+  top: -137px;
+  left: 70px;
+  z-index: 0;
+}
+
+.chartline {
+  z-index: 2;
+  height: 3px;
+  width: 100%;
+  box-shadow: 0px 0px 12px rgba(0, 255, 222, 0.5);
+  background: linear-gradient(#b2edff, #3df4dd);
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .blob__container {
+    display: none !important;
+  }
+}
+
+.blob {
+  height: calc(100vh / 2);
+  width: calc(100vh / 2);
+  border-radius: 100%;
+  position: fixed;
+  transition: 1s;
+  opacity: 0.9;
+}
+
+.blob::before {
+  content: "";
+  background-image: linear-gradient(
+      hsla(257, 34%, 12%, 0.808),
+      hsla(257, 34%, 12%, 0.651)
+    ),
+    url("../assets/images/blob-blurred.png");
+  position: fixed;
+  background-attachment: scroll;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: -175px;
+  transition: 1s;
+}
+
+.blob-one {
+  position: absolute;
+  left: -20%;
+  animation: rotating 40s linear infinite alternate;
+}
+
+@keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.input-caret {
+  border: 1px solid white;
+  width: 1px;
+  height: 100%;
+  animation: showHide 0.5s infinite alternate;
+}
+
+@keyframes showHide {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.colored-back-button:hover {
+  cursor: pointer;
+}
+
+.step4-btn:hover {
+  cursor: pointer;
+}
+
+/* [contenteditable="true"].editable-div {
+  white-space: nowrap;
+  width: 300px;
+  overflow: hidden;
+  height: 100%;
+  border: 1px solid red;
+  text-align: left;
+}
+[contenteditable="true"].editable-div br {
+  display: none;
+}
+[contenteditable="true"].editable-div * {
+  display: inline;
+  white-space: nowrap;
+} */
