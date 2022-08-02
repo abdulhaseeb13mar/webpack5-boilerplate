@@ -1,5 +1,5 @@
 const child1 = () => {
-  return <div>child1</div>;
+  return <div>asdasd</div>;
 };
 
 export default child1;

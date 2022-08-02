@@ -1,8 +1,15 @@
-import React from "react";
+import { Provider } from "react-redux";
 import "./styles.css";
+import Child from "./child1";
+
+import { store } from "@redux/store";
 
 const App = () => {
-  return <div>this is APP.jass</div>;
+  return (
+    <Provider store={store}>
+      <Child />
+    </Provider>
+  );
 };
 
 export default App;

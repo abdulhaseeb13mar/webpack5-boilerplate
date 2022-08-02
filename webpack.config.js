@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -11,6 +12,12 @@ const plugins = [
   new MiniCssExtractPlugin(),
   new HtmlWebpackPlugin({
     template: "./public/index.html",
+  }),
+  new webpack.ProvidePlugin({
+    Buffer: ["buffer", "Buffer"],
+  }),
+  new webpack.ProvidePlugin({
+    process: "process/browser.js",
   }),
 ];
 
@@ -39,7 +46,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif|svg|webp|woff2)$/i,
         type: "asset",
       },
       {
@@ -60,10 +67,29 @@ module.exports = {
   plugins,
 
   resolve: {
+    fallback: {
+      // http: require.resolve("stream-http"),
+      // crypto: require.resolve("crypto-browserify"),
+      // https: require.resolve("https-browserify"),
+      // os: require.resolve("os-browserify"),
+      // buffer: require.resolve("buffer"),
+      stream: require.resolve("stream-browserify"),
+      // asn1js: require.resolve("asn1.js"),
+      // vm: require.resolve("vm-browserify"),
+    },
+    alias: {
+      assets: path.resolve(__dirname, "src/assets/"),
+      theme: path.resolve(__dirname, "src/theme/"),
+      utils: path.resolve(__dirname, "src/utils/"),
+      interfaces: path.resolve(__dirname, "src/interfaces/"),
+      "@redux": path.resolve(__dirname, "src/redux/"),
+      "@slices": path.resolve(__dirname, "src/redux/slices/"),
+      "@constants": path.resolve(__dirname, "src/constants/"),
+    },
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
 
-  //   devtool: "source-map",
+  devtool: "source-map",
   devServer: {
     port: 3001,
     hot: true, // not necessary in the latest version of webpack by default true

@@ -16,7 +16,13 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "downlevelIteration": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "@slices/*": ["redux/slices/*"],
+      // "@styled": ["components/styled/index.ts"],
+      "@constants": ["constants/"],
+      "@redux/*": ["redux/*"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["src/**/*"]
