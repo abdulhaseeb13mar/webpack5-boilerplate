@@ -1,5 +1,5 @@
 const child1 = () => {
-  return <div>asdasd</div>;
+  return <div>stil working with theme</div>;
 };
 
 export default child1;
