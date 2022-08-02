@@ -13,5 +13,5 @@ module.exports = {
     // ],
     "@babel/preset-typescript",
   ],
-  plugins: ["react-refresh/babel"],
+  // plugins: ["react-refresh/babel"],
 };

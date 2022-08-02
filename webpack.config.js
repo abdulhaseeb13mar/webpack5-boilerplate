@@ -13,7 +13,7 @@ const plugins = [
   new MiniCssExtractPlugin(),
   new HtmlWebpackPlugin({
     template: "./public/index.html",
-    scriptLoading: "module",
+    scriptLoading: "defer",
   }),
   new webpack.ProvidePlugin({
     Buffer: ["buffer", "Buffer"],
@@ -39,6 +39,7 @@ module.exports = {
   entry: "./src/index.tsx",
 
   output: {
+    // filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
     assetModuleFilename: "images/[hash][ext][query]",
   },
@@ -57,24 +58,41 @@ module.exports = {
         type: "asset",
       },
       {
-        test: /\.(j|t)sx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            cacheDirectory: true,
+        oneOf: [
+          {
+            test: /\.[jt]s$/,
+            exclude: /node_modules/,
+            use: {
+              loader: "babel-loader",
+              options: {
+                cacheDirectory: true,
+              },
+            },
           },
-        },
+          {
+            test: /\.[jt]sx?$/,
+            exclude: /node_modules/,
+            use: {
+              loader: "babel-loader",
+              options: {
+                cacheDirectory: true,
+                plugins: [
+                  mode === "development" && "react-refresh/babel",
+                ].filter(Boolean),
+              },
+            },
+          },
+        ],
       },
     ],
   },
 
   plugins,
 
-  optimization: {
-    // minimizer: [new UglifyJsPlugin()],
-    runtimeChunk: "single",
-  },
+  // optimization: {
+  //   // minimizer: [new UglifyJsPlugin()],
+  //   runtimeChunk: "",
+  // },
 
   resolve: {
     fallback: {
@@ -124,7 +142,7 @@ module.exports = {
 
   devServer: {
     static: {
-      directory: path.join(__dirname, "dist"),
+      directory: "./public",
     },
     hot: true, // not necessary in the latest version of webpack by default true
   },

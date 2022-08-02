@@ -10,7 +10,7 @@ let persistor = persistStore(store);
 
 function App() {
   return (
-    <div>HEEEELOOOO </div>
+    <div>MEEE</div>
     // <Provider store={store}>
     //   <PersistGate loading={null} persistor={persistor}>
     //     <Theme>
