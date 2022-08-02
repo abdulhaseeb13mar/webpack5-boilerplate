@@ -10,13 +10,14 @@ let persistor = persistStore(store);
 
 function App() {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Theme>
-          <Routing />
-        </Theme>
-      </PersistGate>
-    </Provider>
+    <div>HEEEELOOOO </div>
+    // <Provider store={store}>
+    //   <PersistGate loading={null} persistor={persistor}>
+    //     <Theme>
+    //       <Routing />
+    //     </Theme>
+    //   </PersistGate>
+    // </Provider>
   );
 }
 

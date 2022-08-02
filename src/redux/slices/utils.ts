@@ -118,45 +118,40 @@ export function createBackgroundAsyncThunk<
   Pick<AsyncThunk<Returned, ThunkArg, ThunkApiConfig>, AsyncThunkProps> {
   // Exit early if this type prefix is already aliased for handling in the
   // background script.
-
-  console.log("createBackgroundAsyncThunk RAN=================", typePrefix);
-  if (allAliases[typePrefix]) {
-    throw new Error("Attempted to register an alias twice.");
-  }
-
-  // Use reduxtools' createAsyncThunk to build the infrastructure.
-  const baseThunkActionCreator = createAsyncThunk(
-    typePrefix,
-    async (...args: Parameters<typeof payloadCreator>) => {
-      try {
-        return await payloadCreator(...args);
-      } catch (error) {
-        logger.error("Async thunk failed", error);
-        throw error;
-      }
-    },
-    options
-  );
-
-  // Wrap the top-level action creator to make it compatible with webext-redux.
-  const webextActionCreator = Object.assign(
-    (payload: ThunkArg) => ({
-      type: typePrefix,
-      payload,
-    }),
-    // Copy the utility props on the redux-tools version to our version.
-    Object.fromEntries(
-      asyncThunkProperties.map((prop) => [prop, baseThunkActionCreator[prop]])
-    ) as Pick<AsyncThunk<Returned, ThunkArg, ThunkApiConfig>, AsyncThunkProps>
-  );
-
-  // Register the alias to ensure it will always get proxied back to the
-  // background script, where we will run our proxy action creator to fire off
-  // the thunk correctly.
-  allAliases[typePrefix] = (action: { type: string; payload: ThunkArg }) =>
-    baseThunkActionCreator(action.payload);
-
-  return webextActionCreator;
+  // console.log("createBackgroundAsyncThunk RAN=================", typePrefix);
+  // if (allAliases[typePrefix]) {
+  //   throw new Error("Attempted to register an alias twice.");
+  // }
+  // // Use reduxtools' createAsyncThunk to build the infrastructure.
+  // const baseThunkActionCreator = createAsyncThunk(
+  //   typePrefix,
+  //   async (...args: Parameters<typeof payloadCreator>) => {
+  //     try {
+  //       return await payloadCreator(...args);
+  //     } catch (error) {
+  //       logger.error("Async thunk failed", error);
+  //       throw error;
+  //     }
+  //   },
+  //   options
+  // );
+  // // Wrap the top-level action creator to make it compatible with webext-redux.
+  // const webextActionCreator = Object.assign(
+  //   (payload: ThunkArg) => ({
+  //     type: typePrefix,
+  //     payload,
+  //   }),
+  //   // Copy the utility props on the redux-tools version to our version.
+  //   Object.fromEntries(
+  //     asyncThunkProperties.map((prop) => [prop, baseThunkActionCreator[prop]])
+  //   ) as Pick<AsyncThunk<Returned, ThunkArg, ThunkApiConfig>, AsyncThunkProps>
+  // );
+  // // Register the alias to ensure it will always get proxied back to the
+  // // background script, where we will run our proxy action creator to fire off
+  // // the thunk correctly.
+  // allAliases[typePrefix] = (action: { type: string; payload: ThunkArg }) =>
+  //   baseThunkActionCreator(action.payload);
+  // return webextActionCreator;
 }
 
 /**

@@ -4,8 +4,8 @@ import { persistReducer } from "redux-persist";
 import appReducer from "@slices/appSlice";
 import walletReducer from "@slices/walletSlice";
 import sendTransaction from "@slices/sendTransaction";
-import dappPermissionReducer from "@slices/dapp-permission";
-import transactionConstructionReducer from "@slices/transaction-construction";
+// import dappPermissionReducer from "@slices/dapp-permission";
+// import transactionConstructionReducer from "@slices/transaction-construction";
 import signingReducer from "@slices/signing";
 
 const storage = require("redux-persist/lib/storage").default;
@@ -21,8 +21,8 @@ const reducers = combineReducers({
   app: appReducer,
   wallet: walletReducer,
   sendTransaction,
-  dappPermission: dappPermissionReducer,
-  transactionConstruction: transactionConstructionReducer,
+  // dappPermission: dappPermissionReducer,
+  // transactionConstruction: transactionConstructionReducer,
   signing: signingReducer,
 });
 

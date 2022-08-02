@@ -77,7 +77,7 @@ const Step2: FC<PROPS> = ({ changeStep, currentStep }) => {
   return (
     <div className="c-c-c">
       <Text size={18} weight={400}>
-        Let's create a password to
+        Let's create a password
       </Text>
       <Text size={18} weight={400}>
         keep things safe...

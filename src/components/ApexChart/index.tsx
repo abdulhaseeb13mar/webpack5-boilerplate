@@ -180,7 +180,7 @@ const DashChart: FC<DestructureData> = (props) => {
   return (
     <ReactApexChart
       options={options}
-      series={[{ enabled: true, name: "Series1", data: seriesData }]}
+      // series={[{ enabled: true, name: "Series1", data: seriesData }]}
       type="area"
       height={290}
       width={360}

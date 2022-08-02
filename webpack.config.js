@@ -3,6 +3,7 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+// const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const webpack = require("webpack");
 
 let mode = "development";
@@ -12,6 +13,7 @@ const plugins = [
   new MiniCssExtractPlugin(),
   new HtmlWebpackPlugin({
     template: "./public/index.html",
+    scriptLoading: "module",
   }),
   new webpack.ProvidePlugin({
     Buffer: ["buffer", "Buffer"],
@@ -19,29 +21,24 @@ const plugins = [
   new webpack.ProvidePlugin({
     process: "process/browser.js",
   }),
+  new ReactRefreshWebpackPlugin(),
 ];
 
 if (process.env.NODE_ENV === "production") {
   mode = "production";
 }
 
-if (process.env.FAST_REFRESH) {
-  plugins.push(new ReactRefreshWebpackPlugin());
-}
+// if (process.env.FAST_REFRESH) {
+//   plugins.push(new ReactRefreshWebpackPlugin());
+// }
 
 module.exports = {
+  target: "web",
   mode,
 
-  entry: {
-    main: "src/index",
-    background: "./src/background.ts",
-    content: "./src/content.js",
-    page: "./src/page.ts",
-    notification: "./src/notification.js",
-  },
+  entry: "./src/index.tsx",
 
   output: {
-    filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
     assetModuleFilename: "images/[hash][ext][query]",
   },
@@ -65,10 +62,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            plugins: [
-              process.env.FAST_REFRESH &&
-                require.resolve("react-refresh/babel"),
-            ].filter(Boolean),
+            cacheDirectory: true,
           },
         },
       },
@@ -78,6 +72,7 @@ module.exports = {
   plugins,
 
   optimization: {
+    // minimizer: [new UglifyJsPlugin()],
     runtimeChunk: "single",
   },
 
@@ -89,8 +84,11 @@ module.exports = {
       os: require.resolve("os-browserify"),
       buffer: require.resolve("buffer"),
       stream: require.resolve("stream-browserify"),
+      asn1js: require.resolve("asn1.js"),
+      vm: require.resolve("vm-browserify"),
     },
-    preferRelative: true,
+    // modules: ["node_modules"],
+    // preferRelative: true,
     alias: {
       abis: path.resolve(__dirname, "src/abis"),
       assets: path.resolve(__dirname, "src/assets/"),
@@ -117,9 +115,17 @@ module.exports = {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
 
+  externals: {
+    react: "React",
+    "react-dom": "ReactDOM",
+  },
+
   devtool: "source-map",
 
   devServer: {
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
     hot: true, // not necessary in the latest version of webpack by default true
   },
 };
