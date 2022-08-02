@@ -65,6 +65,7 @@ module.exports = {
 
   //   devtool: "source-map",
   devServer: {
+    port: 3001,
     hot: true, // not necessary in the latest version of webpack by default true
   },
 };
