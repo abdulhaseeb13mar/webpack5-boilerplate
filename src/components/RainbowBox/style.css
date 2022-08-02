@@ -1,0 +1,112 @@
+* {
+  outline: red;
+}
+.center {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rainbow-container {
+  overflow: hidden;
+  padding: 4px;
+}
+
+.rainbow {
+  width: 500px;
+  height: 500px;
+  background-color: black;
+  position: relative;
+}
+
+.rainbow::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  z-index: -2;
+  left: calc(-50rem + 50%);
+  top: calc(-50rem + 50%);
+  offset: "-50rem";
+  width: 100rem;
+  height: 100rem;
+  background-color: rgb(57, 153, 83);
+  background-repeat: no-repeat;
+  background-image: conic-gradient(
+    from 0.31turn,
+    rgb(90, 71, 211),
+    rgb(53, 223, 75) 0.18turn,
+    rgb(255, 178, 0) 0.47turn,
+    rgb(239, 24, 174) 0.67turn,
+    rgb(90, 71, 211)
+  );
+  animation: 5s linear 0s infinite normal none running rotate;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.body {
+  background-color: #1a1429;
+}
+
+.shade {
+  height: 50%;
+  background-image: linear-gradient(
+    160deg,
+    rgba(51, 210, 133, 0.1),
+    rgba(51, 210, 133, 0.01),
+    rgba(26, 34, 47, 0) 40%
+  );
+}
+
+.shade._2 {
+  height: 50%;
+  background-image: linear-gradient(
+    345deg,
+    rgba(255, 0, 49, 0.1),
+    rgba(255, 0, 49, 0.005),
+    rgba(255, 0, 49, 0) 40%
+  );
+}
+
+.shade-box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: auto;
+  height: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 479px) {
+  .shade {
+    background-image: linear-gradient(
+      160deg,
+      #35d989,
+      #1a2530,
+      rgba(26, 34, 47, 0) 30%
+    );
+  }
+
+  .shade._2 {
+    background-image: linear-gradient(
+      345deg,
+      #25122e,
+      #331a47,
+      rgba(37, 21, 49, 0) 30%
+    );
+  }
+}

@@ -19,7 +19,7 @@
     "baseUrl": "src",
     "paths": {
       "@slices/*": ["redux/slices/*"],
-      // "@styled": ["components/styled/index.ts"],
+      "@styled": ["components/styled/index.ts"],
       "@constants": ["constants/"],
       "@redux/*": ["redux/*"]
     }
